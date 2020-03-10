@@ -60,6 +60,15 @@ void add_node(Line a, Line b)
 	return;
 }
 
+int judge(Line a, Line b, struct node c)
+{
+	int ans = 0;
+	double A1=a.getA(), B1=a.getA(), C1=a.getC();
+	double A2 = b.getA(), B2 = b.getA(), C2 = b.getC();
+	if (c.x * A1 + c.y * B1 + C1 == 0 && c.x * A2 + c.y * B2 + C2 == 0)return 1;
+	else return 0;
+}
+
 int main(int argc, char** argv)
 {
 	int n;
