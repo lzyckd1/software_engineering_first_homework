@@ -4,99 +4,17 @@
 #include<iostream>
 #include<fstream>
 #include<set>
+#include  "node.h"
+#include "Line.h"
+#include "intersect.h"
 using namespace std;
 
 const int maxn = 10001;
 int countn = 0;
 
-struct node {
-	double x, y;
-	bool operator <(const struct node &other) const
-	{
-		if (x < other.x) return true;
-		else if (x == other.x && y < other.y) return true;
-		else return false;
-	}
-};
-
 set <struct node> node_set;
 
-class Line
-{
-public:
-	Line();
-	Line(double x1, double y1, double x2, double y2);
-	~Line();
-	bool getExistK() {
-		return exist_k;
-	}
-	double getX1() {
-		return x1;
-	}
-	double getY1() {
-		return y1;
-	}
-	double getX2() {
-		return x2;
-	}
-	double getY2() {
-		return y2;
-	}
-	double getK() {
-		return k;
-	}
-	double getA() {
-		return A;
-	}
-	double getB() {
-		return B;
-	}
-	double getC() {
-		return C;
-	}
-
-private:
-	double x1, y1, x2, y2, k;
-	double A, B, C;
-	bool exist_k;
-};
-
-Line::Line(){
-	this->x1 = 0;
-	this->x2 = 0;
-	this->y1 = 0;
-	this->y2 = 0;
-	this->A = 0;
-	this->B = 0;
-	this->C = 0;
-	this->k = 0;
-	this->exist_k = false;
-}
-
-Line::Line(double x1,double y1,double x2,double y2)
-{
-	this->x1 = x1;
-	this->x2 = x2;
-	this->y1 = y1;
-	this->y2 = y2;
-	this->A = y1 - y2;
-	this->B = x2 - x1;
-	this->C = x1 * y2 - x2 * y1;
-	this->k = 0;
-	if (x1 == x2) {
-		this->exist_k = false;
-	}
-	else {
-		this->exist_k = true;
-		this->k = (y2 - y1) / (x2 - x1);
-	}
-}
-
-Line::~Line()
-{
-}
-
-Line *lseq = new Line[maxn];
+Line* lseq = new Line[maxn];
 
 struct node findIntersection(Line a, Line b)
 {
@@ -147,8 +65,8 @@ int main(int argc, char** argv)
 	int n;
 	double a, b, c, d;
 	char p;
-	ifstream infile(argv[2]);  // argv[2]
-	ofstream outfile(argv[4]);   // argv[4]
+	ifstream infile("input.txt");  // argv[2]
+	ofstream outfile("output.txt");   // argv[4]
 	infile >> n;
 	for (int i = 0; i < n; i++)
 	{
@@ -158,7 +76,7 @@ int main(int argc, char** argv)
 		for (int j = 0; j < i; j++) {
 			add_node(lseq[i], lseq[j]);
 		}
-		
+
 	}
 	outfile << countn;
 	return 0;
